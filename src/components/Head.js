@@ -8,7 +8,7 @@ const Head=()=>{
   const [searchQuery,setSearchQuery]=useState('');
   const [suggestion,setSuggestion]=useState([]);
   const [showSuggestion,setShowSuggestion]=useState(false);
-  const searchCache = useSelector((store)=>store.search)
+  const searchCache = useSelector((store)=>store.search);
     const dispatch=useDispatch();
     useEffect(()=>{
       const timer = setTimeout(()=>{
@@ -16,7 +16,7 @@ const Head=()=>{
           setSuggestion(searchCache[searchQuery]);
         }
         else{
-          getSearchSuggestion()
+          getSearchSuggestion();
         } 
       
       },200)
@@ -25,10 +25,11 @@ const Head=()=>{
       }
 
     },[searchQuery]);
+    
     const getSearchSuggestion=async()=>{
           const data=await fetch(YOUTUBE_SEARCH_API+searchQuery);
           const json=await data.json();
-          console.log("API CALLED"+ "-" + searchQuery);
+          // console.log("API CALLED"+ "-" + searchQuery);
         setSuggestion(json[1]);
 
         //update cache
@@ -39,6 +40,15 @@ const Head=()=>{
     const toggleMenuHandler =()=>{
          dispatch(toggleMenu());
     }
+    
+    const handleListItem =(item)=>{
+      console.log("this item is clicked",item);
+      setSearchQuery(item);
+    }
+
+   // const searchedText=(item)=>{
+    //   console.log("this is clicked");
+    // }
 
   return(
     <div className="grid grid-flow-col p-5 m-2 shadow-lg"> 
@@ -63,18 +73,18 @@ const Head=()=>{
             value={searchQuery}
             onChange={(e)=>{setSearchQuery(e.target.value);}}
             onFocus={()=>setShowSuggestion(true)}
-            onBlur={()=>{setShowSuggestion(false)}}
+            onBlur={()=>{setTimeout(()=>{setShowSuggestion(false)},500);}}
             />
             <button className="border border-gray-500 px-5 py-2 rounded-r-full bg-gray-200">🔍</button> { /*commmand +control + x */}
         </div>
         {
-          showSuggestion && (
+          showSuggestion && searchQuery&& (
         <div className="fixed bg-white py-5 px-5 w-[24.5rem] shadow-lg rounded-lg border border-gray-100">
         <ul>
           {
             suggestion?.map((item)=>{
               return(
-                item?<li className="py-2 px-1 shadow-sm hover:bg-gray-100" key={item}>🔍 {item}</li>:null
+                item?<li className="py-2 px-1 shadow-sm hover:bg-gray-100 cursor-pointer" key={item} onClick={()=>{handleListItem(item)}}>🔍 {item} </li>:null
               )
             })
           }

@@ -9,8 +9,7 @@ const searchSlice=createSlice({
                 // console.log("Action"+action);
                 // state={...action.payload,...state}
                 state=Object.assign(state,action.payload)
-
-                console.log("state"+state);
+                // console.log("state"+state);
             }
         }
 })
