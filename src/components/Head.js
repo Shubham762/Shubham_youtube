@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/AppSlice";
 import { useEffect, useState } from "react";
@@ -50,6 +51,16 @@ const Head=()=>{
     //   console.log("this is clicked");
     // }
 
+=======
+import { useDispatch } from "react-redux";
+import { toggleMenu } from "../utils/AppSlice";
+
+const Head=()=>{
+    const dispatch=useDispatch();
+    const toggleMenuHandler =()=>{
+         dispatch(toggleMenu());
+    }
+>>>>>>> d6586d7 (youtube clone)
   return(
     <div className="grid grid-flow-col p-5 m-2 shadow-lg"> 
     <div className="flex col-span-1">
@@ -66,6 +77,7 @@ const Head=()=>{
         </a>
         </div>
         <div className="col-span-10 px-44">
+<<<<<<< HEAD
           <div>
             <input
             className="w-1/2 border border-gray-500 p-2 rounded-l-full px-5"
@@ -94,6 +106,13 @@ const Head=()=>{
           )
         }
         </div>
+=======
+            <input
+            className="w-1/2 border border-gray-500 p-2 rounded-l-full"
+            type="text"/>
+            <button className="border border-gray-500 px-5 py-2 rounded-r-full bg-gray-200">🔍</button> { /*commmand +control + x */}
+        </div>
+>>>>>>> d6586d7 (youtube clone)
         <div className="col-span-1">
             <img 
             className="h-8"
